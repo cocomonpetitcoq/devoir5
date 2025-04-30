@@ -29,8 +29,7 @@ public abstract class Document {
 		this.nbCopies = nbCopies;
 	}
 
-	public  String toString() {
-		return "Le No d'Enregistrement du Document est: " + noEnregistrement + "Le titre du Document est:" + titre + ",Le nombre de copies du Document est: " + nbCopies + "";
+	public  abstract String toString() {
 	}
 	
 	
