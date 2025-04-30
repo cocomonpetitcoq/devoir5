@@ -20,7 +20,7 @@ public abstract class Document {
 		return titre;
 	}
 	public void setTitre(String titre) {
-		titre = titre;
+		this.titre = titre;
 	}
 	public int getNbCopies() {
 		return nbCopies;
