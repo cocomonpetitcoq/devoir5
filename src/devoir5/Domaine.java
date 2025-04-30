@@ -1,5 +1,5 @@
 package devoir5;
 
 public enum Domaine {
-	Biologie,Nutritio,Ergonomie,Médecine,Chiropratique;
+	Biologie,Nutrition,Ergonomie,Médecine,Chiropratique;
 }
