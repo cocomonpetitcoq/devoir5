@@ -5,6 +5,13 @@ public abstract class Document {
 	protected String Titre;
 	protected int nbCopies;
 	
+	public Document(String noEnregistrement, String titre, int nbCopies) {
+	
+		NoEnregistrement = générerNoEnregistrement();;
+		this.Titre = titre;
+		this.nbCopies = nbCopies;
+	}
+	
 	public String getNoEnregistrement() {
 		return NoEnregistrement;
 	}
@@ -23,9 +30,9 @@ public abstract class Document {
 	public void setNbCopies(int nbCopies) {
 		this.nbCopies = nbCopies;
 	}
-	@Override
+
 	public String toString() {
-		return "Document: [Le No d'Enregistrement est: " + NoEnregistrement + "Le titre est:" + Titre + ",Le nombre de copies est: " + nbCopies + "]";
+		return "Le No d'Enregistrement du Document est: " + NoEnregistrement + "Le titre du Document est:" + Titre + ",Le nombre de copies du Document est: " + nbCopies + "";
 	}
 	
 	
