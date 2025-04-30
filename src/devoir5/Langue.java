@@ -1,5 +1,5 @@
 package devoir5;
 
 public enum Langue {
-	FrançaisAanglais,Espagnol,Latin,Allemand;
+	Français,Anglais,Espagnol,Latin,Allemand;
 }
