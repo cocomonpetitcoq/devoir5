@@ -7,7 +7,7 @@ public abstract class Document {
 	
 	public Document( String titre, int nbCopies) {
 	
-		noEnregistrement = générerNoEnregistrement();;
+		noEnregistrement = générerNoEnregistrement();
 		this.titre = titre;
 		this.nbCopies = nbCopies;
 	}
