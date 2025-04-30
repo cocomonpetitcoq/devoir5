@@ -29,8 +29,5 @@ public abstract class Document {
 		this.nbCopies = nbCopies;
 	}
 
-	public  abstract String toString() {
-	}
-	
-	
+	public  abstract String toString();
 }
