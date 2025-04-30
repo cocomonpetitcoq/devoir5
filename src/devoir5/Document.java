@@ -5,7 +5,7 @@ public abstract class Document {
 	protected String Titre;
 	protected int nbCopies;
 	
-	public Document(String noEnregistrement, String titre, int nbCopies) {
+	public Document( String titre, int nbCopies) {
 	
 		NoEnregistrement = générerNoEnregistrement();;
 		this.Titre = titre;
@@ -15,9 +15,7 @@ public abstract class Document {
 	public String getNoEnregistrement() {
 		return NoEnregistrement;
 	}
-	public void setNoEnregistrement(String noEnregistrement) {
-		NoEnregistrement = noEnregistrement;
-	}
+
 	public String getTitre() {
 		return Titre;
 	}
