@@ -1,7 +1,6 @@
 package devoir5;
 
 public abstract class Livre extends Document {
-	
 	protected String auteur;
 	protected int nbPages;
 
