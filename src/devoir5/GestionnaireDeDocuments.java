@@ -80,4 +80,24 @@ public class GestionnaireDeDocuments {
 		}
 		}
 	}
+	private static void créerManuel() {
+		
+		System.out.print(" Le Titre est : ");
+	    String titre = scanner.nextLine();
+
+	    int nbCopies = validerNombre();
+
+	    System.out.print("L'Auteur est : ");
+	    String auteur = scanner.nextLine();
+
+	    int nbPages = validerNombre(" ");
+
+	    énumérerDomaines();
+	    int choix = traiterOption(1, Domaine.values().length);
+	    Domaine choixDomaine = Domaine.values()[choix - 1];
+
+	    documents.add(new Manuel(titre, nbCopies, auteur, nbPages, choixDomaine));
+	    System.out.println("Manuel créé avec succès.");
+		
+	}
 }
