@@ -67,9 +67,11 @@ public class GestionnaireDeDocuments {
                     break;
 
                 }
- 
-		}	
+             	}
+        	System.out.print("\n");
 		}
+		System.out.println("Au revoir !");
+		scanner.close();
 	}
 		
 
