@@ -1,5 +1,7 @@
 package devoir5;
 
+import java.util.ArrayList;
+
 public class GestionnaireDeDocuments {
 
 	public static void main(String[] args) {
@@ -46,5 +48,33 @@ public class GestionnaireDeDocuments {
 		} else {
 			return true;
 		}
+	}
+	
+	public static void créerRoman() {
+		System.out.println(" Le Titre est :");
+		String titre =scanner.nextLine();
+		System.out.println("L'auteur est ");
+		String auteur=scanner.nextLine();
+		System.out.println(" Le nombre de pages :");
+		int nbPages = validerNombre();
+		System.out.println(" Le nombre de copies a faire:");
+		int nbCopies = validerNombre();
+		System.out.println("Le Prix Litteraire ");
+		String listePrixLittéraires= scanner.nextLine();
+		
+		ArrayList<String> prix = new ArrayList<>();
+	    String nom;
+	    do {
+	        System.out.print("Ajouter un prix littéraire (laisser vide pour terminer) : ");
+	        nom = nom.nextLine();
+	        if (!nom.isEmpty()) {
+	            prix.add(nom);
+	        }
+	    } while (!nom.isEmpty());
+
+	    documents.add(new Roman(titre, nbCopies, auteur, nbPages, prix));
+	    System.out.println("Roman créé avec succès.");
+		
+
 	}
 }
