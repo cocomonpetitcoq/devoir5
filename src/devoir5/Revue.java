@@ -10,17 +10,17 @@ public class Revue extends Document {
 		this.annéePublication = annéePublication;
 	
 	}
-	public Mois getmoisPublication() {
+	public Mois getMoisPublication() {
 		return moisPublication;
 	}
-	public int getannéePublication() {
+	public int getAnnéePublication() {
 		return annéePublication;
 	}
 
-	@Override
+	
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Ce document est de type revue. " + "Cette revue dont le titre est " + titre +" a été publié le " + moisPublication + annéePublication + " et vous avez " + nbCopies ;
+
+		return "Ce document est de type revue. Cette revue dont le titre est " + getTitre() + " a été publié le " + getMoisPublication() + getAnnéePublication() + " et vous avez " + getNbCopies() ;
 	}
 	
 
