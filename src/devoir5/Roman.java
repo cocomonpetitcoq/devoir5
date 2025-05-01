@@ -14,17 +14,17 @@ public class Roman extends Livre {
 	}
 	public void afficherListePrixLiterraire() {
 		if (prixLiterraire.isEmpty()) {
-			System.out.println("Ce Roman n'as pas de prix");
+			System.out.println("Ce Roman n'as pas gagné de prix Litteraire");
 		}else {
-			System.out.println("Le prix de ce livre est ");
+			System.out.println("Ce roman a gagné ");
 			for (String prix : prixLiterraire) {
 				System.out.println(prix);
 			}
 		}
 	}
 	public String toString() {
-		return "le titre de ce roman est " + titre + "Le nombre de copies du roman est " + nbCopies + "Le nombre de pages du roman est" + nbPages + "L'auteur du Roman est " + auteur + ""
-				+ "le prix du roman est" + prixLiterraire ;
+		return "Ce manuel dont le titre est " + titre  + "a été écrit par " + auteur + " á " + nbPages + " pages et vous avez"
+	+ nbCopies + "copies" + " et vous avez  gagné " + prixLiterraire + " prix Litteraires";
 	}
 	
 	
