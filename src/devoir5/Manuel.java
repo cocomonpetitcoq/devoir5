@@ -11,7 +11,7 @@ public class Manuel extends Livre{
 	}
 	public String toString() {
 		return "Ce manuel dont le titre est  " + titre  + "a été écrit par  " + auteur + " á " + nbPages + " pages et traite de la" + domaine +
-				" vous avez " + nbCopies + "copiés";
+				" . Vous avez " + nbCopies + "copies";
 	}
 
 }
