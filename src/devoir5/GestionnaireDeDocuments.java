@@ -4,7 +4,7 @@ public class GestionnaireDeDocuments {
 
 	public static void main(String[] args) {
 	}
-	
+
 	private static void afficherMenu() {
 		System.out.println("==========MENU==========\n");
 		System.out.println("Option 1 : Ajouter un document");
@@ -46,5 +46,15 @@ public class GestionnaireDeDocuments {
 		} else {
 			return true;
 		}
+	}
+
+	private static void énumérerLangues() {
+		Langue[] langues = Langue.values();
+
+		System.out.println("\nListe des langues");
+		for (int i = 0; i < langues.length; i++) {
+			System.out.println((i + 1) + ". " + langues[i]);
+		}
+		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
 	}
 }
