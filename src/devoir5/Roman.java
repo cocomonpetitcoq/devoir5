@@ -9,7 +9,7 @@ public class Roman extends Livre {
 		super(titre,nbCopies,auteur,nbPages);
 		this.listesPrixLiterraire=listesPrixLiterraire;
 	}
-	public ArrayList<String> getlistesPrixLiteraire() {
+	public ArrayList<String> getListesPrixLiteraire() {
 		return listesPrixLiterraire;
 	}
 	public void afficherListePrixLiterraire() {
@@ -23,8 +23,8 @@ public class Roman extends Livre {
 		}
 	}
 	public String toString() {
-		return  "Ce documneent est de type Roman." + "Ce Roman dont le titre est " + titre  + "a été écrit par " + auteur + " á " + nbPages + " pages et vous avez"
-	+ nbCopies + "copies" + " et vous avez  gagné " + listesPrixLiterraire + " prix Litteraires";
+		return  "Ce documneent est de type Roman. Ce Roman dont le titre est " + getTitre() + " a été écrit par " + getauteur() + " á " + getnbPages() +  " pages et vous avez "
+	+ getNbCopies() + " copies et vous avez  gagné " + getListesPrixLiteraire()+ " prix Litteraires";
 	}
 	
 	
