@@ -23,7 +23,7 @@ public class GestionnaireDeDocuments {
 	public static void enumererMois() {
 		Mois [] mois = Mois.values();
 
-		System.out.println ( " \n Liste des domaines" );
+		System.out.println ( " \n Liste des mois" );
 		for (int i = 0; i < mois.length; i++) {
 			System.out.println (( i + 1 ) + ". " + mois [ i ]);
 		}
