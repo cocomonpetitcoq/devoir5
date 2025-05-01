@@ -80,4 +80,19 @@ public class GestionnaireDeDocuments {
 		}
 		}
 	}
+	private static void créerRevue() {
+	    System.out.print(" Le Titre est : ");
+	    String titre = scanner.nextLine();
+
+	    int nbCopies = validerNombre();
+
+	    énumérerMois();
+	    int moisChoisi = traiterOption(1, Mois.values().length);
+	    Mois mois = Mois.values()[moisChoisi - 1];
+	    System.out.print(" L'année de Fabrication est : ");
+	    int annee = validerAnnéePublication();
+
+	    documents.add(new Revue(titre, nbCopies, mois, annee));
+	    System.out.println("Revue créé avec succès.");
+	}
 }
