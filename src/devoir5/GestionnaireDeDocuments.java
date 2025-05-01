@@ -1,9 +1,78 @@
 package devoir5;
 
-public class GestionnaireDeDocuments {
+import java.util.ArrayList;
+import java.util.Scanner;
 
+public class GestionnaireDeDocuments {
+	
+	private static ArrayList<Document> documents = new ArrayList<>();
+    private static Scanner scanner = new Scanner(System.in);
+	private static int option;
 	public static void main(String[] args) {
+	
+		boolean arrêt = false;
+	
+		
+	
+
+		while (!arrêt) {
+			option = traiterOption(1, 10);
+
+			afficherMenu();
+            option = traiterOption(1, 10); 
+        	switch (option) {
+                case 1:{
+
+                	break;
+                }
+                case 2:{
+      
+                	break;
+                }
+                case 3:{
+
+                	break;
+                }
+                case 4:{
+
+                	break;
+                }
+                case 5:{
+                	
+                	  break;
+                }
+                  
+                case 6:{
+                	
+                	  break;
+                }
+
+                case 7:{
+                	
+                	  break;
+                }
+                case 8:{
+                	
+                    break;
+
+                }
+                case 9:{
+                	
+                    break;
+
+                }
+                   
+                case 10:{
+                	
+                    break;
+
+                }
+ 
+		}	
+		}
 	}
+		
+
 	
 	private static void afficherMenu() {
 		System.out.println("==========MENU==========\n");
