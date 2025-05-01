@@ -4,7 +4,7 @@ public class GestionnaireDeDocuments {
 
 	public static void main(String[] args) {
 	}
-	
+
 	private static void afficherMenu() {
 		System.out.println("==========MENU==========\n");
 		System.out.println("Option 1 : Ajouter un document");
@@ -46,5 +46,15 @@ public class GestionnaireDeDocuments {
 		} else {
 			return true;
 		}
+	}
+
+	private static void énumérerDomaines() {
+		Domaine[] domaines = Domaine.values();
+
+		System.out.println("\nListe des domaines");
+		for (int i = 0; i < domaines.length; i++) {
+			System.out.println((i + 1) + ". " + domaines[i]);
+		}
+		System.out.println("\nVeuillez choisir un domaine pour le manuel.");
 	}
 }
