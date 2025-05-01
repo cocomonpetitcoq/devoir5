@@ -23,7 +23,7 @@ public class Roman extends Livre {
 		}
 	}
 	public String toString() {
-		return "Ce manuel dont le titre est " + titre  + "a été écrit par " + auteur + " á " + nbPages + " pages et vous avez"
+		return  "Ce documneent est de type Roman." + "Ce Roman dont le titre est " + titre  + "a été écrit par " + auteur + " á " + nbPages + " pages et vous avez"
 	+ nbCopies + "copies" + " et vous avez  gagné " + prixLiterraire + " prix Litteraires";
 	}
 	
