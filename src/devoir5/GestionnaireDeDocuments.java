@@ -57,4 +57,27 @@ public class GestionnaireDeDocuments {
 		}
 		System.out.println("\nVeuillez choisir un domaine pour le manuel.");
 	}
+
+	private static void créerDocument() {
+		afficherTypesDocuments();
+		int option = traiterOption(1, 4);
+		switch (option) {
+		case 1: {
+			créerRoman();
+			break;
+		}
+		case 2: {
+			créerManuel();
+			break;
+		}
+		case 3: {
+			créerRevue();
+			break;
+		}
+		case 4: {
+			créerDictionnaire();
+			break;
+		}
+		}
+	}
 }
