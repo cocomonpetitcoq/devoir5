@@ -10,8 +10,8 @@ public class Manuel extends Livre{
 		return domaine;
 	}
 	public String toString() {
-		return "le titre du Domaine est " + titre + "Son Domaine est " + domaine +"L'auteur est " + auteur + " Le nombre de Pages est" + nbPages +
-				" le nombre de copies est " + nbCopies;
+		return "Ce manuel dont le titre est  " + titre  + "a été écrit par  " + auteur + " á " + nbPages + " pages et traite de la" + domaine +
+				" vous avez " + nbCopies + "copiés";
 	}
 
 }
