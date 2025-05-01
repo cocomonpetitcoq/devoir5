@@ -19,4 +19,10 @@ public class GestionnaireDeDocuments {
 		System.out.println("Appuyez sur 0 pour quitter.\n");
 		System.out.println("Veuillez choisir une option.");
 	}
+	
+	public static void enumererMois() {
+		for(int i=0; i<Mois.values().length;i++) {
+			System.out.println((i+1) + ". " + Mois.values()[i]);
+		}
+	}
 }
