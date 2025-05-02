@@ -47,6 +47,25 @@ public class GestionnaireDeDocuments {
 			return true;
 		}
 	}
+	
+	private static void afficherTypesDocuments() {
+		System.out.println("\n==========AJOUTER UN DOCUMENT==========\n");
+		System.out.println("1. Roman");
+		System.out.println("2. Manuel");
+		System.out.println("3. Revue");
+		System.out.println("4. Dictionnaire");
+		System.out.println("\nVeuillez choisir le type de document à créer.");
+	}
+
+	private static void énumérerDomaines() {
+		Domaine[] domaines = Domaine.values();
+
+		System.out.println("\nListe des domaines");
+		for (int i = 0; i < domaines.length; i++) {
+			System.out.println((i + 1) + ". " + domaines[i]);
+		}
+		System.out.println("\nVeuillez choisir un domaine pour le manuel.");
+	}
 
 	private static void énumérerLangues() {
 		Langue[] langues = Langue.values();
@@ -56,5 +75,28 @@ public class GestionnaireDeDocuments {
 			System.out.println((i + 1) + ". " + langues[i]);
 		}
 		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
+	}
+
+	private static void créerDocument() {
+		afficherTypesDocuments();
+		int option = traiterOption(1, 4);
+		switch (option) {
+		case 1: {
+			créerRoman();
+			break;
+		}
+		case 2: {
+			créerManuel();
+			break;
+		}
+		case 3: {
+			créerRevue();
+			break;
+		}
+		case 4: {
+			créerDictionnaire();
+			break;
+		}
+		}
 	}
 }
