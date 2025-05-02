@@ -190,24 +190,26 @@ public class GestionnaireDeDocuments {
 		documents.add(new Roman(titre, nbCopies, auteur, nbPages, listePrixLittéraires));
 		System.out.println("\nLe roman a été créé et ajouté avec succès!");
 	}
+
 	private static void créerManuel() {
-		
-		System.out.print(" Le Titre est : ");
-	    String titre = scanner.nextLine();
+		System.out.println("\n==========CRÉATION D'UN MANUEL==========");
+		System.out.println("\nVeuillez fournir le titre du manuel.");
+		String titre = scanner.nextLine().trim();
 
-	    int nbCopies = validerNombre();
+		System.out.println("\nVeuillez fournir le nom de l'auteur du manuel.");
+		String auteur = scanner.nextLine().trim();
 
-	    System.out.print("L'Auteur est : ");
-	    String auteur = scanner.nextLine();
+		System.out.println("\nVeuillez fournir le nombre de pages du manuel.");
+		int nbPages = validerNombre();
 
-	    int nbPages = validerNombre(" ");
+		System.out.println("\nVeuillez fournir le nombre de copies du manuel que vous avez.");
+		int nbCopies = validerNombre();
 
-	    énumérerDomaines();
-	    int choix = traiterOption(1, Domaine.values().length);
-	    Domaine choixDomaine = Domaine.values()[choix - 1];
+		énumérerDomaines();
+		int option = traiterOption(1, Domaine.values().length);
+		Domaine domaine = Domaine.values()[option - 1];
 
-	    documents.add(new Manuel(titre, nbCopies, auteur, nbPages, choixDomaine));
-	    System.out.println("Manuel créé avec succès.");
-		
+		documents.add(new Manuel(titre, nbCopies, auteur, nbPages, domaine));
+		System.out.println("\nLe manuel a été créé et ajouté avec succès!");
 	}
 }
