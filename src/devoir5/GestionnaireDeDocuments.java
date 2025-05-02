@@ -158,4 +158,36 @@ public class GestionnaireDeDocuments {
 		}
 		}
 	}
+
+	private static void créerRoman() {
+		System.out.println("\n==========CRÉATION D'UN ROMAN==========");
+		System.out.println("\nVeuillez fournir le titre du roman.");
+		String titre = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nom de l'auteur du roman.");
+		String auteur = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nombre de pages du roman.");
+		int nbPages = validerNombre();
+
+		System.out.println("\nVeuillez fournir le nombre de copies du roman que vous avez.");
+		int nbCopies = validerNombre();
+
+		ArrayList<String> listePrixLittéraires = new ArrayList<String>();
+
+		System.out.println("\nCe roman a-t-il gagné un ou des prix littéraires ?\n1. Oui\n2. Non");
+		int option = traiterOption(1, 2);
+
+		while (option == 1) {
+			System.out.println("\nVeuillez fournir le prix littéraire que ce roman a gagné.");
+			listePrixLittéraires.add(scanner.nextLine().trim());
+
+			System.out.println(
+					"\nY a-t-il un ou plusieurs autres prix littéraires à ajouter à la liste ?\n1. Oui\n2. Non");
+			option = traiterOption(1, 2);
+		}
+
+		documents.add(new Roman(titre, nbCopies, auteur, nbPages, listePrixLittéraires));
+		System.out.println("\nLe roman a été créé et ajouté avec succès!");
+	}
 }
