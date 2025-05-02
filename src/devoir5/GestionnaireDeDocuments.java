@@ -67,6 +67,16 @@ public class GestionnaireDeDocuments {
 		System.out.println("\nVeuillez choisir un domaine pour le manuel.");
 	}
 
+	private static void énumérerLangues() {
+		Langue[] langues = Langue.values();
+
+		System.out.println("\nListe des langues");
+		for (int i = 0; i < langues.length; i++) {
+			System.out.println((i + 1) + ". " + langues[i]);
+		}
+		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
+	}
+
 	private static void créerDocument() {
 		afficherTypesDocuments();
 		int option = traiterOption(1, 4);
