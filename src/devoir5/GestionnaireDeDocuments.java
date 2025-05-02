@@ -80,4 +80,17 @@ public class GestionnaireDeDocuments {
 		}
 		}
 	}
+	public static void créerDictionnaire() {
+	    System.out.print(" Le Titre est : ");
+	    String titre = scanner.nextLine();
+
+	    int nbCopies = validerNombre("Nombre de copies : ");
+
+	    énumérerLangues();
+	    int choix = traiterOption(1, Langue.values().length);
+	    Langue langue = Langue.values()[choix - 1];
+
+	    documents.add(new Dictionnaire(titre, nbCopies, langue));
+	    System.out.println("Dictionnaire créé avec succès.");
+	}
 }
