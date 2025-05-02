@@ -158,32 +158,36 @@ public class GestionnaireDeDocuments {
 		}
 		}
 	}
-	
-	public static void créerRoman() {
-		System.out.println(" Le Titre est :");
-		String titre =scanner.nextLine();
-		System.out.println("L'auteur est ");
-		String auteur=scanner.nextLine();
-		System.out.println(" Le nombre de pages :");
+
+	private static void créerRoman() {
+		System.out.println("\n==========CRÉATION D'UN ROMAN==========");
+		System.out.println("\nVeuillez fournir le titre du roman.");
+		String titre = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nom de l'auteur du roman.");
+		String auteur = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nombre de pages du roman.");
 		int nbPages = validerNombre();
-		System.out.println(" Le nombre de copies a faire:");
+
+		System.out.println("\nVeuillez fournir le nombre de copies du roman que vous avez.");
 		int nbCopies = validerNombre();
-		System.out.println("Le Prix Litteraire ");
-		String listePrixLittéraires= scanner.nextLine();
-		
-		ArrayList<String> prix = new ArrayList<>();
-	    String nom;
-	    do {
-	        System.out.print("Ajouter un prix littéraire (laisser vide pour terminer) : ");
-	        nom = nom.nextLine();
-	        if (!nom.isEmpty()) {
-	            prix.add(nom);
-	        }
-	    } while (!nom.isEmpty());
 
-	    documents.add(new Roman(titre, nbCopies, auteur, nbPages, prix));
-	    System.out.println("Roman créé avec succès.");
-		
+		ArrayList<String> listePrixLittéraires = new ArrayList<String>();
 
+		System.out.println("\nCe roman a-t-il gagné un ou des prix littéraires ?\n1. Oui\n2. Non");
+		int option = traiterOption(1, 2);
+
+		while (option == 1) {
+			System.out.println("\nVeuillez fournir le prix littéraire que ce roman a gagné.");
+			listePrixLittéraires.add(scanner.nextLine().trim());
+
+			System.out.println(
+					"\nY a-t-il un ou plusieurs autres prix littéraires à ajouter à la liste ?\n1. Oui\n2. Non");
+			option = traiterOption(1, 2);
+		}
+
+		documents.add(new Roman(titre, nbCopies, auteur, nbPages, listePrixLittéraires));
+		System.out.println("\nLe roman a été créé et ajouté avec succès!");
 	}
 }
