@@ -190,4 +190,26 @@ public class GestionnaireDeDocuments {
 		documents.add(new Roman(titre, nbCopies, auteur, nbPages, listePrixLittéraires));
 		System.out.println("\nLe roman a été créé et ajouté avec succès!");
 	}
+
+	private static void créerManuel() {
+		System.out.println("\n==========CRÉATION D'UN MANUEL==========");
+		System.out.println("\nVeuillez fournir le titre du manuel.");
+		String titre = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nom de l'auteur du manuel.");
+		String auteur = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nombre de pages du manuel.");
+		int nbPages = validerNombre();
+
+		System.out.println("\nVeuillez fournir le nombre de copies du manuel que vous avez.");
+		int nbCopies = validerNombre();
+
+		énumérerDomaines();
+		int option = traiterOption(1, Domaine.values().length);
+		Domaine domaine = Domaine.values()[option - 1];
+
+		documents.add(new Manuel(titre, nbCopies, auteur, nbPages, domaine));
+		System.out.println("\nLe manuel a été créé et ajouté avec succès!");
+	}
 }
