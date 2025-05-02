@@ -20,14 +20,13 @@ public class GestionnaireDeDocuments {
 		System.out.println("Veuillez choisir une option.");
 	}
 	
-	public static void enumererMois() {
-		Mois [] mois = Mois.values();
+	private static void énumérerMois() {
+		Mois[] mois = Mois.values();
 
-		System.out.println ( " \n Liste des mois" );
+		System.out.println("\nListe des mois");
 		for (int i = 0; i < mois.length; i++) {
-			System.out.println (( i + 1 ) + ". " + mois [ i ]);
+			System.out.println((i + 1) + ". " + mois[i]);
 		}
-		System.out.println ( " \n Veuillez choisir un mois ." );
+		System.out.println("\nVeuillez choisir un mois de publication pour la revue.");
 		}
 	}
-}
