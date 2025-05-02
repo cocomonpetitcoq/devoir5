@@ -96,7 +96,7 @@ public class GestionnaireDeDocuments {
 			return true;
 		}
 	}
-	
+
 	private static void afficherTypesDocuments() {
 		System.out.println("\n==========AJOUTER UN DOCUMENT==========\n");
 		System.out.println("1. Roman");
@@ -104,6 +104,16 @@ public class GestionnaireDeDocuments {
 		System.out.println("3. Revue");
 		System.out.println("4. Dictionnaire");
 		System.out.println("\nVeuillez choisir le type de document à créer.");
+	}
+
+	private static void énumérerMois() {
+		Mois[] mois = Mois.values();
+
+		System.out.println("\nListe des mois");
+		for (int i = 0; i < mois.length; i++) {
+			System.out.println((i + 1) + ". " + mois[i]);
+		}
+		System.out.println("\nVeuillez choisir un mois de publication pour la revue.");
 	}
 
 	private static void énumérerDomaines() {
