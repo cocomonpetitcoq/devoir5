@@ -4,78 +4,56 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionnaireDeDocuments {
-	
-	private static ArrayList<Document> documents = new ArrayList<>();
-    private static Scanner scanner = new Scanner(System.in);
-	private static int option;
+	private static ArrayList<Document> documents = new ArrayList<Document>();
+	private static Scanner scanner = new Scanner(System.in);
+
 	public static void main(String[] args) {
-	
+		int option;
 		boolean arrêt = false;
-	
-		
-	
 
 		while (!arrêt) {
-			option = traiterOption(1, 10);
-
 			afficherMenu();
-            option = traiterOption(1, 10); 
-        	switch (option) {
-                case 1:{
+			option = traiterOption(0, 9);
 
-                	break;
-                }
-                case 2:{
-      
-                	break;
-                }
-                case 3:{
-
-                	break;
-                }
-                case 4:{
-
-                	break;
-                }
-                case 5:{
-                	
-                	  break;
-                }
-                  
-                case 6:{
-                	
-                	  break;
-                }
-
-                case 7:{
-                	
-                	  break;
-                }
-                case 8:{
-                	
-                    break;
-
-                }
-                case 9:{
-                	
-                    break;
-
-                }
-                   
-                case 10:{
-                	
-                    break;
-
-                }
-             	}
-        	System.out.print("\n");
+			switch (option) {
+			case 0: {
+				arrêt = true;
+				break;
+			}
+			case 1: {
+				break;
+			}
+			case 2: {
+				break;
+			}
+			case 3: {
+				break;
+			}
+			case 4: {
+				break;
+			}
+			case 5: {
+				break;
+			}
+			case 6: {
+				break;
+			}
+			case 7: {
+				break;
+			}
+			case 8: {
+				break;
+			}
+			case 9: {
+				break;
+			}
+			}
+			System.out.print("\n");
 		}
 		System.out.println("Au revoir !");
 		scanner.close();
 	}
-		
 
-	
 	private static void afficherMenu() {
 		System.out.println("==========MENU==========\n");
 		System.out.println("Option 1 : Ajouter un document");
