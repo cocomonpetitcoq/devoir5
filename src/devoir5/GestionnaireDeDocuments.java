@@ -47,6 +47,15 @@ public class GestionnaireDeDocuments {
 			return true;
 		}
 	}
+	
+	private static void afficherTypesDocuments() {
+		System.out.println("\n==========AJOUTER UN DOCUMENT==========\n");
+		System.out.println("1. Roman");
+		System.out.println("2. Manuel");
+		System.out.println("3. Revue");
+		System.out.println("4. Dictionnaire");
+		System.out.println("\nVeuillez choisir le type de document à créer.");
+	}
 
 	private static void énumérerDomaines() {
 		Domaine[] domaines = Domaine.values();
