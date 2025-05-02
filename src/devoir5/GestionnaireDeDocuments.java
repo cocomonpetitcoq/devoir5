@@ -1,8 +1,57 @@
 package devoir5;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class GestionnaireDeDocuments {
+	private static ArrayList<Document> documents = new ArrayList<Document>();
+	private static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		int option;
+		boolean arrêt = false;
+
+		while (!arrêt) {
+			afficherMenu();
+			option = traiterOption(0, 9);
+
+			switch (option) {
+			case 0: {
+				arrêt = true;
+				break;
+			}
+			case 1: {
+				break;
+			}
+			case 2: {
+				break;
+			}
+			case 3: {
+				break;
+			}
+			case 4: {
+				break;
+			}
+			case 5: {
+				break;
+			}
+			case 6: {
+				break;
+			}
+			case 7: {
+				break;
+			}
+			case 8: {
+				break;
+			}
+			case 9: {
+				break;
+			}
+			}
+			System.out.print("\n");
+		}
+		System.out.println("Au revoir !");
+		scanner.close();
 	}
 
 	private static void afficherMenu() {
@@ -48,6 +97,25 @@ public class GestionnaireDeDocuments {
 		}
 	}
 
+	private static void afficherTypesDocuments() {
+		System.out.println("\n==========AJOUTER UN DOCUMENT==========\n");
+		System.out.println("1. Roman");
+		System.out.println("2. Manuel");
+		System.out.println("3. Revue");
+		System.out.println("4. Dictionnaire");
+		System.out.println("\nVeuillez choisir le type de document à créer.");
+	}
+
+	private static void énumérerMois() {
+		Mois[] mois = Mois.values();
+
+		System.out.println("\nListe des mois");
+		for (int i = 0; i < mois.length; i++) {
+			System.out.println((i + 1) + ". " + mois[i]);
+		}
+		System.out.println("\nVeuillez choisir un mois de publication pour la revue.");
+	}
+
 	private static void énumérerDomaines() {
 		Domaine[] domaines = Domaine.values();
 
@@ -56,6 +124,16 @@ public class GestionnaireDeDocuments {
 			System.out.println((i + 1) + ". " + domaines[i]);
 		}
 		System.out.println("\nVeuillez choisir un domaine pour le manuel.");
+	}
+
+	private static void énumérerLangues() {
+		Langue[] langues = Langue.values();
+
+		System.out.println("\nListe des langues");
+		for (int i = 0; i < langues.length; i++) {
+			System.out.println((i + 1) + ". " + langues[i]);
+		}
+		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
 	}
 
 	private static void créerDocument() {
@@ -79,6 +157,38 @@ public class GestionnaireDeDocuments {
 			break;
 		}
 		}
+	}
+
+	private static void créerRoman() {
+		System.out.println("\n==========CRÉATION D'UN ROMAN==========");
+		System.out.println("\nVeuillez fournir le titre du roman.");
+		String titre = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nom de l'auteur du roman.");
+		String auteur = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nombre de pages du roman.");
+		int nbPages = validerNombre();
+
+		System.out.println("\nVeuillez fournir le nombre de copies du roman que vous avez.");
+		int nbCopies = validerNombre();
+
+		ArrayList<String> listePrixLittéraires = new ArrayList<String>();
+
+		System.out.println("\nCe roman a-t-il gagné un ou des prix littéraires ?\n1. Oui\n2. Non");
+		int option = traiterOption(1, 2);
+
+		while (option == 1) {
+			System.out.println("\nVeuillez fournir le prix littéraire que ce roman a gagné.");
+			listePrixLittéraires.add(scanner.nextLine().trim());
+
+			System.out.println(
+					"\nY a-t-il un ou plusieurs autres prix littéraires à ajouter à la liste ?\n1. Oui\n2. Non");
+			option = traiterOption(1, 2);
+		}
+
+		documents.add(new Roman(titre, nbCopies, auteur, nbPages, listePrixLittéraires));
+		System.out.println("\nLe roman a été créé et ajouté avec succès!");
 	}
 	private static void créerManuel() {
 		
