@@ -1,3 +1,5 @@
+//https://en.wikipedia.org/wiki/Magazine#History
+
 package devoir5;
 
 import java.util.ArrayList;
@@ -211,5 +213,26 @@ public class GestionnaireDeDocuments {
 
 		documents.add(new Manuel(titre, nbCopies, auteur, nbPages, domaine));
 		System.out.println("\nLe manuel a été créé et ajouté avec succès!");
+	}
+
+	private static int validerAnnéePublication() {
+		int annéePublication = 0;
+		boolean valide = false;
+
+		System.out.println("\nVeuillez fournir l'année de publication de la revue.");
+
+		while (!valide) {
+			try {
+				annéePublication = Integer.parseInt(scanner.nextLine().trim());
+				if (annéePublication >= 1663) {
+					valide = true;
+				} else {
+					System.out.println("\nAucune revue n'était publiée à cette époque. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nCeci est une entrée invalide. Recommencez.");
+			}
+		}
+		return annéePublication;
 	}
 }
