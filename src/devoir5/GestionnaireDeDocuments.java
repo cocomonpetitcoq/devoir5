@@ -1,4 +1,5 @@
 //https://en.wikipedia.org/wiki/Magazine#History
+//https://www.baeldung.com/find-list-element-java#5-java-8-stream-api
 
 package devoir5;
 
@@ -23,30 +24,56 @@ public class GestionnaireDeDocuments {
 				break;
 			}
 			case 1: {
+				if (validerQuantitéDocuments()) {
+					créerDocument();
+				}
 				break;
 			}
 			case 2: {
+				if (validerQuantitéDocuments()) {
+					supprimerDocument();
+				}
 				break;
 			}
 			case 3: {
+				if (validerQuantitéDocuments()) {
+					System.out.println("\n==========AFFICHER LES DOCUMENTS==========\n");
+					afficherDocuments();
+				}
 				break;
 			}
 			case 4: {
+				if (validerQuantitéDocuments()) {
+					afficherCaractéristiquesDocument();
+				}
 				break;
 			}
 			case 5: {
+				if (validerQuantitéDocuments()) {
+					afficherPrixLittéraires();
+				}
 				break;
 			}
 			case 6: {
+				if (validerQuantitéDocuments()) {
+					modifierNbCopies();
+				}
 				break;
 			}
 			case 7: {
+				if (validerQuantitéDocuments()) {
+					modifierTitreDocument();
+				}
 				break;
 			}
 			case 8: {
+				if (validerQuantitéDocuments()) {
+					modifierAuteurLivre();
+				}
 				break;
 			}
 			case 9: {
+				créerDocumentsPrédéfinis();
 				break;
 			}
 			}
@@ -138,7 +165,7 @@ public class GestionnaireDeDocuments {
 		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
 	}
 
-	private static void créerDocument() {
+	private static void créerDocument() { 
 		afficherTypesDocuments();
 		int option = traiterOption(1, 4);
 		switch (option) {
@@ -159,6 +186,25 @@ public class GestionnaireDeDocuments {
 			break;
 		}
 		}
+	}
+
+	private static int validerNombre() {
+		int nombre = 0;
+		boolean valide = false;
+
+		while (!valide) {
+			try {
+				nombre = Integer.parseInt(scanner.nextLine().trim());
+				if (nombre > 0) {
+					valide = true;
+				} else {
+					System.out.println("\nVeuillez fournir un nombre entier positif. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nCeci est une entrée invalide. Recommencez.");
+			}
+		}
+		return nombre;
 	}
 
 	private static void créerRoman() {
@@ -235,4 +281,155 @@ public class GestionnaireDeDocuments {
 		}
 		return annéePublication;
 	}
+
+	private static void modifierNbCopies() {
+		System.out.println("\n==========MODIFIER LE NOMBRE DE COPIES D'UN DOCUMENT==========");   
+    Document doc = trouverDocumentParNoEnregistrement();
+    System.out.println("\nNombre de copies actuel : " + doc.getNbCopies());
+
+    System.out.println("\nVoulez-vous augmenter ou diminuer le nombre de copies?\n1. Augmenter\n2. Diminuer");
+		int option = traiterOption(1, 2);
+
+		switch (option) {
+			case 1: {
+				System.out.println("\nVeuillez fournir le nombre de copies à ajouter.");
+				int nbCopiesAugmenter = validerNombre();
+				document.setNbCopies(document.getNbCopies() + nbCopiesAugmenter);
+				break;
+			}
+			case 2: {
+				System.out.println("\nVeuillez fournir le nombre de copies à enlever.");
+				int nbCopiesDiminuer = validerNbCopiesDiminuer(document);
+				document.setNbCopies(document.getNbCopies() - nbCopiesDiminuer);
+				break;}
+			}
+			System.out.println("\nLe nombre de copies a été modifié avec succès!");
+}
+
+private static int validerNbCopiesDiminuer(Document doc) {
+    int nb = 0;
+		boolean valide = false;
+
+    while (!valide) {
+        try {
+            nb = Integer.parseInt(scanner.nextLine().trim());
+            if (nb > 0 && nb <= doc.getNbCopies()) {
+                valide = true;
+            } else {
+							System.out.println("\nVeuillez fournir un nombre entier positif et inférieur au nombre de copies du document. Réessayez.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Veuillez entrer un entier valide.");
+        }
+    }
+		return nb;
+}
+
+private static void modifierTitreDocument() {
+	System.out.println("\n==========MODIFIER LE TITRE D'UN DOCUMENT==========\n");
+	afficherDocuments();
+    Document doc = trouverDocumentParTitreEtNoEnregistrement();
+
+    System.out.println("\nEntrez le nouveau titre");
+    String nouveauTitre = scanner.nextLine().trim();
+
+    System.out.println("\nNouveau titre proposé : " + nouveauTitre);
+    System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
+    int option = traiterOption(1, 2);
+
+			if (option == 1) {
+				document.setTitre(nouveauTitre);
+				System.out.println("\nLe titre du document a été modifié avec succès!");
+			}
+    else {
+        System.out.println("\nModification annulée.");
+    }
+}
+
+private static void modifierAuteurLivre() {
+	System.out.println("\n==========MODIFIER L'AUTEUR D'UN LIVRE==========");
+	ArrayList<Livre> livres = trouverDocumentsLivre();
+	if (livres.size() > 0) {
+		afficherLivres(livres);
+		Livre livre = trouverLivreParTitreEtAuteur(livres);
+
+    System.out.println("\nEntrez le nouvel auteur : ");
+    String nouvelAuteur = scanner.nextLine().trim();
+
+    System.out.println("\nNouvel auteur proposé : " + nouvelAuteur);
+    System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
+    int option = traiterOption(1, 2);
+
+				if (option == 1) {
+					livre.setAuteur(nouvelAuteur);
+					System.out.println("\nL'auteur du livre a été modifié avec succès!");
+				}
+    else {
+        System.out.println("Modification annulée.");
+    }
+}
+else {
+	System.out.println("\nIl n'y a aucun livre dans la liste de documents.");
+}
+}
+
+private static ArrayList<Livre> trouverDocumentsLivre() {
+	ArrayList<Livre> livres = new ArrayList<Livre>();
+
+    for (Document doc : documents) {
+        if (doc instanceof Livre) {
+            livres.add(doc);
+        }
+    }
+    return livres;
+}
+
+private static void afficherLivres(ArrayList<Livre> livres) {
+	System.out.println("\nListe des livres");
+    for (Document livre : livres) {
+        System.out.println(livre.getTitre() + " - " + livre.getAuteur());
+    }
+}
+
+private static Livre trouverLivreParTitreEtAuteur(ArrayList<Livre> livres) {
+	Livre livre = null;
+			boolean succès = false;
+
+    while (!succès) {
+			try {
+				System.out.println("\nVeuillez fournir le titre d'un livre.");
+				String titre = scanner.nextLine().trim();
+
+				System.out.println("\nVeuillez fournir l'auteur d'un livre.");
+				String auteur = scanner.nextLine().trim();
+
+				livre = livres.stream().filter(livre -> livre.getTitre().equalsIgnoreCase(titre)
+						&& livre.getAuteur().equalsIgnoreCase(auteur)).findFirst().get();
+
+				if (livre != null) {
+					succès = true;
+				} else {
+					System.out.println("\nAucun livre ne correspond à ces informations. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nUne erreur s'est produite. Veuillez recommencer.");
+			}
+    }
+		return livre;
+}
+private static void ajoutDocumentsPrédéfinis() {
+	documents.add(new Roman("Les Misérables", 6, "Victor Hugo", 1734, ArrayList<String>("Prix Goncourt", "Prix Goncourt")));
+	documents.add(new Roman("Le Seigneur des Anneaux", 10, "J.R.R. Tolkien", 1536, ArrayList<String>()));
+	documents.add(new Roman("1984", 3, "George Orwell", 2051, ArrayList<String>("Prix Renaudot")));
+	documents.add(new Manuel("Les softskills pour les nuls", 2, "Nelly Magré", 277, Domaine.Médecine));
+	documents.add(new Manuel("Éducation alimentaire : 21 ateliers d'éveil au goût et aux 5 sens", 1, "Carole Ligniez", 176, Domaine.Nutrition));
+	documents.add(new Manuel("SOS mal de dos : les bons gestes et les bonnes postures", 4, "Frédéric Srour", 127, Domaine.Ergonomie));
+	documents.add(new Revue("Protégez-vous", 2, Mois.Janvier, 2024));
+	documents.add(new Revue("Protégez-vous", 1, Mois.Février, 2024));
+	documents.add(new Revue("Protégez-vous", 2, Mois.Mars, 2024));
+	documents.add(new Dictionnaire("Larousse de l'anglais", 1, Langue.ANGLAIS));
+	documents.add(new Dictionnaire("Dictionnaire de français", 3, Langue.FRANÇAIS));
+	documents.add(new Dictionnaire("Dictionnaire de l'allemand", 1, Langue.ALLEMAND));
+	System.out.println("\nDocuments prédéfinis ont été ajoutés avec succès!");
+}
 }
