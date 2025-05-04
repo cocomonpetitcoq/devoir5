@@ -432,4 +432,224 @@ private static void ajoutDocumentsPrédéfinis() {
 	documents.add(new Dictionnaire("Dictionnaire de l'allemand", 1, Langue.ALLEMAND));
 	System.out.println("\nDocuments prédéfinis ont été ajoutés avec succès!");
 }
+
+package devoir5;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+    // Mike
+
+    public void créerRevue() {
+        System.out.println("Entrez le numéro d'enregistrement (9 caractères) : ");
+        String regNum = scanner.nextLine();
+        System.out.println("Entrez le titre : ");
+        String title = scanner.nextLine();
+        System.out.println("Entrez le nombre de copies : ");
+        int copies = getValidInteger();
+
+        
+        String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
+                          "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+        System.out.println("Sélectionnez le mois de publication :");
+        for (int i = 0; i < months.length; i++) {
+            System.out.println((i + 1) + ". " + months[i]);
+        }
+        int monthIndex = getValidInteger(1, months.length) - 1;
+        String month = months[monthIndex];
+
+       
+        int year = validerAnnéePublication();
+
+        Magazine magazine = new Magazine(regNum, title, copies, month, year);
+        documents.add(magazine);
+        System.out.println("Revue ajoutée avec succès.");
+    }
+
+    public void créerDictionnaire() {
+        System.out.println("Entrez le numéro d'enregistrement (9 caractères) : ");
+        String regNum = scanner.nextLine();
+        System.out.println("Entrez le titre : ");
+        String title = scanner.nextLine();
+        System.out.println("Entrez le nombre de copies : ");
+        int copies = getValidInteger();
+
+        
+        String[] languages = {"Français", "Anglais", "Espagnol", "Latin", "Allemand"};
+        System.out.println("Sélectionnez la langue :");
+        for (int i = 0; i < languages.length; i++) {
+            System.out.println((i + 1) + ". " + languages[i]);
+        }
+        int langIndex = getValidInteger(1, languages.length) - 1;
+        String language = languages[langIndex];
+
+        Dictionary dictionary = new Dictionary(regNum, title, copies, language);
+        documents.add(dictionary);
+        System.out.println("Dictionnaire ajouté avec succès.");
+    }
+
+    public void supprimerDocument() {
+        if (documents.isEmpty()) {
+            System.out.println("Aucun document disponible.");
+            return;
+        }
+
+        afficherDocuments();
+        Document doc = trouverDocumentParTitreEtNoEnregistrement();
+        if (doc == null) {
+            System.out.println("Document non trouvé.");
+            return;
+        }
+
+        System.out.println("Confirmez la suppression de " + doc.getTitle() + " (o/n) ? ");
+        String confirmation = scanner.nextLine().trim().toLowerCase();
+        if (confirmation.equals("o")) {
+            documents.remove(doc);
+            System.out.println("Document supprimé avec succès.");
+        } else {
+            System.out.println("Suppression annulée.");
+        }
+    }
+
+    public Document trouverDocumentParTitreEtNoEnregistrement() {
+        while (true) {
+            System.out.println("Entrez le titre du document : ");
+            String title = scanner.nextLine();
+            System.out.println("Entrez le numéro d'enregistrement : ");
+            String regNum = scanner.nextLine();
+
+            for (Document doc : documents) {
+                if (doc.getTitle().equalsIgnoreCase(title) && 
+                    doc.getRegistrationNumber().equals(regNum)) {
+                    return doc;
+                }
+            }
+            System.out.println("Aucun document trouvé avec le titre et le numéro d'enregistrement fournis.");
+        }
+    }
+
+    public void afficherCaractéristiques() {
+        if (documents.isEmpty()) {
+            System.out.println("Aucun document disponible.");
+            return;
+        }
+
+        Document doc = trouverDocumentParNoEnregistrement();
+        if (doc != null) {
+            System.out.println(doc.toString());
+        } else {
+            System.out.println("Document non trouvé.");
+        }
+    }
+
+    public Document trouverDocumentParNoEnregistrement() {
+        while (true) {
+            System.out.println("Entrez le numéro d'enregistrement : ");
+            String regNum = scanner.nextLine();
+
+            for (Document doc : documents) {
+                if (doc.getRegistrationNumber().equals(regNum)) {
+                    return doc;
+                }
+            }
+            System.out.println("Aucun document trouvé avec le numéro d'enregistrement fourni.");
+        }
+    }
+
+    public void afficherPrixLittéraires() {
+        if (documents.isEmpty()) {
+            System.out.println("Aucun document disponible.");
+            return;
+        }
+
+        List<Novel> novels = trouverDocumentsRoman();
+        if (novels.isEmpty()) {
+            System.out.println("Aucun roman disponible.");
+            return;
+        }
+
+        afficherRomans(novels);
+        Novel novel = trouverRomanParTitreEtAuteur(novels);
+        if (novel != null) {
+            novel.afficherListePrixLittéraires();
+        } else {
+            System.out.println("Roman non trouvé.");
+        }
+    }
+
+    public List<Novel> trouverDocumentsRoman() {
+        List<Novel> novels = new ArrayList<>();
+        for (Document doc : documents) {
+            if (doc instanceof Novel) {
+                novels.add((Novel) doc);
+            }
+        }
+        return novels;
+    }
+
+    public void afficherRomans(List<Novel> novels) {
+        if (novels.isEmpty()) {
+            System.out.println("Aucun roman disponible.");
+            return;
+        }
+
+        System.out.println("Romans :");
+        for (Novel novel : novels) {
+            System.out.println("- " + novel.getTitle() + " par " + novel.getAuthor());
+        }
+    }
+
+    public Novel trouverRomanParTitreEtAuteur(List<Novel> novels) {
+        while (true) {
+            System.out.println("Entrez le titre du roman : ");
+            String title = scanner.nextLine();
+            System.out.println("Entrez l'auteur : ");
+            String author = scanner.nextLine();
+
+            for (Novel novel : novels) {
+                if (novel.getTitle().equalsIgnoreCase(title) && 
+                    novel.getAuthor().equalsIgnoreCase(author)) {
+                    return novel;
+                }
+            }
+            System.out.println("Aucun roman trouvé avec le titre et l'auteur fournis.");
+        }
+    }
+
+    private int getValidInteger() {
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine());
+                if (value >= 0) {
+                    return value;
+                } else {
+                    System.out.println("Erreur : Veuillez entrer un nombre non négatif.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur : Veuillez entrer un nombre valide.");
+            }
+        }
+    }
+
+    private int getValidInteger(int min, int max) {
+        while (true) {
+            try {
+                int value = Integer.parseInt(scanner.nextLine());
+                if (value >= min && value <= max) {
+                    return value;
+                } else {
+                    System.out.println("Erreur : Veuillez entrer un nombre entre " + min + " et " + max + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erreur : Veuillez entrer un nombre valide.");
+            }
+        }
+    }
+
+    // Add this if not present to access documents list
+    public List<Document> getDocuments() {
+        return documents;
+    }
 }
