@@ -3,6 +3,7 @@
 package devoir5;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class GestionnaireDeDocuments {
@@ -138,7 +139,7 @@ public class GestionnaireDeDocuments {
 		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
 	}
 
-	private static void créerDocument() {
+	private static void créerDocument() { 
 		afficherTypesDocuments();
 		int option = traiterOption(1, 4);
 		switch (option) {
@@ -235,4 +236,143 @@ public class GestionnaireDeDocuments {
 		}
 		return annéePublication;
 	}
+public static void modifierNbCopies(List<Document> documents, Scanner scanner) {
+   
+    if (documents.isEmpty()) {
+        System.out.println("La liste de documents est vide.");
+        return;
+    }
+
+    Document doc = trouverDocumentParNoEnregistrement(documents, scanner);
+    System.out.println("Nombre de copies actuel : " + doc.getNbCopies());
+
+    System.out.print("Voulez-vous augmenter (A) ou diminuer (D) le nombre de copies ? (A/D) : ");
+    String choix = scanner.nextLine().trim().toUpperCase();
+
+    if (choix.equals("A")) {
+        int nb = validerNombre(scanner);
+        doc.setNbCopies(doc.getNbCopies() + nb);
+    } else if (choix.equals("D")) {
+        int nb = validerNbCopiesDiminuer(doc, scanner);
+        doc.setNbCopies(doc.getNbCopies() - nb);
+    } else {
+        System.out.println("Option invalide.");
+    }
+}
+private static Document trouverDocumentParNoEnregistrement(List<Document> documents2, Scanner scanner2) {
+	
+	return null;
+}
+
+private static int validerNombre(Scanner scanner2) {
+	
+	return 0;
+}
+
+public static int validerNbCopiesDiminuer(Document doc, Scanner scanner) {
+   
+    int nb;
+    while (true) {
+        System.out.print("Combien de copies voulez-vous retirer (max " + doc.getNbCopies() + ") ? : ");
+        try {
+            nb = Integer.parseInt(scanner.nextLine());
+            if (nb > 0 && nb <= doc.getNbCopies()) {
+                return nb;
+            } else {
+                System.out.println("Veuillez entrer un entier positif inférieur ou égal au nombre de copies disponibles.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Veuillez entrer un entier valide.");
+        }
+    }
+}
+
+public static void modifierTitreDocument(List<Document> documents, Scanner scanner) {
+    if (documents.isEmpty()) {
+        System.out.println("La liste de documents est vide.");
+        return;
+    }
+
+    afficherLivres(documents);
+    Document doc = trouverDocumentParTitreEtNoEnregistrement(documents, scanner);
+
+    System.out.print("Entrez le nouveau titre : ");
+    String nouveauTitre = scanner.nextLine();
+    System.out.println("Nouveau titre proposé : " + nouveauTitre);
+    System.out.print("Confirmez-vous la modification ? (O/N) : ");
+    String confirmation = scanner.nextLine().trim().toUpperCase();
+
+    if (confirmation.equals("O")) {
+        doc.setTitre(nouveauTitre);
+        System.out.println("Titre modifié avec succès.");
+    } else {
+        System.out.println("Modification annulée.");
+    }
+}
+public static void modifierAuteurLivre(List<Document> documents, Scanner scanner) {
+    if (documents.isEmpty()) {
+        System.out.println("La liste de documents est vide.");
+        return;
+    }
+
+    List<Livre> livres = trouverDocumentsLivre(documents);
+    afficherLivres(livres);
+    Livre livre = trouverLivreParTitreEtAuteur(livres, scanner);
+
+    System.out.print("Entrez le nouvel auteur : ");
+    String nouvelAuteur = scanner.nextLine();
+    System.out.println("Nouvel auteur proposé : " + nouvelAuteur);
+    System.out.print("Confirmez-vous la modification ? (O/N) : ");
+    String confirmation = scanner.nextLine().trim().toUpperCase();
+
+    if (confirmation.equals("O")) {
+        livre.setAuteur(nouvelAuteur);
+        System.out.println("Auteur modifié avec succès.");
+    } else {
+        System.out.println("Modification annulée.");
+    }
+}
+public static List<Livre> trouverDocumentsLivre(List<Document> documents) {
+    
+    List<Livre> livres = new ArrayList<>();
+    for (Document doc : documents) {
+        if (doc instanceof Livre) {
+            livres.add((Livre) doc);
+        }
+    }
+    return livres;
+}
+
+public static void afficherLivres(List<Livre> livres) {
+    for (Document livre : livres) {
+        System.out.println("Titre : " + livre.getTitre() + ", Auteur : " + livre.getAuteur());
+    }
+}
+
+public static Livre trouverLivreParTitreEtAuteur(List<Livre> livres, Scanner scanner) {
+    while (true) {
+        System.out.print("Entrez le titre du livre : ");
+        String titre = scanner.nextLine();
+        System.out.print("Entrez l'auteur du livre : ");
+        String auteur = scanner.nextLine();
+
+        for (Livre livre : livres) {
+            if (livre.getTitre().equalsIgnoreCase(titre) && livre.getAuteur().equalsIgnoreCase(auteur)) {
+                return livre;
+            }
+        }
+        System.out.println("Aucun livre ne correspond aux données fournies. Veuillez réessayer.");
+    }
+}
+public static void ajoutDocumentsPredefinis(List<Document> documents) {
+   
+    for (int i = 1; i <= 3; i++) {
+        documents.add(new Roman("Roman " + i, "Auteur R" + i, 5));
+        documents.add(new Manuel("Manuel " + i, "Auteur M" + i, 3));
+        documents.add(new Revue("Revue " + i, "Auteur V" + i, 2));
+        documents.add(new Dictionnaire("Dictionnaire " + i, "Auteur D" + i, 1));
+    }
+}
+
+
 }
