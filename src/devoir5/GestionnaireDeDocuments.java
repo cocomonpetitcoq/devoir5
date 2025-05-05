@@ -1,5 +1,19 @@
-//https://en.wikipedia.org/wiki/Magazine#History
-//https://www.baeldung.com/find-list-element-java#5-java-8-stream-api
+/*NOMS DES MEMBRES ET CODES PERMANENTS :
+ * 
+ * Martel,Angela                           MARA22559304
+ * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
+ * Mbonwo Kenne,Lesline                    MBOL87300100
+ * Enga Enga,Mike Landry                   ENGM66310200
+ * 
+ * 
+ * 
+ * DESCRIPTION : L’objectif est de centraliser la gestion de l’ensemble des documents, en permettant l’ajout, la suppression, la recherche et la consultation des documents tout en garantissant l’unicité des numéros d’enregistrement.
+ * 
+ * 
+ * RÉFÉRENCES : 
+ * Wikipedia. (2025, 4 mai). Magazine Wikipedia. https://en.wikipedia.org/wiki/Magazine#History
+ * baeldung. (2025, 4 avril). How to Find an Element in a List with Java Baeldung. https://www.baeldung.com/find-list-element-java#5-java-8-stream-api
+ */
 
 package devoir5;
 
@@ -24,9 +38,7 @@ public class GestionnaireDeDocuments {
 				break;
 			}
 			case 1: {
-				if (validerQuantitéDocuments()) {
-					créerDocument();
-				}
+				créerDocument();
 				break;
 			}
 			case 2: {
@@ -44,7 +56,7 @@ public class GestionnaireDeDocuments {
 			}
 			case 4: {
 				if (validerQuantitéDocuments()) {
-					afficherCaractéristiquesDocument();
+					afficherCaractéristiques();
 				}
 				break;
 			}
@@ -73,7 +85,7 @@ public class GestionnaireDeDocuments {
 				break;
 			}
 			case 9: {
-				créerDocumentsPrédéfinis();
+				ajoutDocumentsPrédéfinis();
 				break;
 			}
 			}
@@ -165,7 +177,7 @@ public class GestionnaireDeDocuments {
 		System.out.println("\nVeuillez choisir une langue pour le dictionnaire.");
 	}
 
-	private static void créerDocument() { 
+	private static void créerDocument() {
 		afficherTypesDocuments();
 		int option = traiterOption(1, 4);
 		switch (option) {
@@ -261,6 +273,24 @@ public class GestionnaireDeDocuments {
 		System.out.println("\nLe manuel a été créé et ajouté avec succès!");
 	}
 
+	private static void créerRevue() {
+		System.out.println("\n==========CRÉATION D'UNE REVUE==========");
+		System.out.println("\nVeuillez fournir le titre de la revue.");
+		String titre = scanner.nextLine().trim();
+
+		System.out.println("\nVeuillez fournir le nombre de copies de la revue que vous avez.");
+		int nbCopies = validerNombre();
+
+		énumérerMois();
+		int option = traiterOption(1, Mois.values().length);
+		Mois moisPublication = Mois.values()[option - 1];
+
+		int annéePublication = validerAnnéePublication();
+
+		documents.add(new Revue(titre, nbCopies, moisPublication, annéePublication));
+		System.out.println("\nLa revue a été créée et ajoutée avec succès!");
+	}
+
 	private static int validerAnnéePublication() {
 		int annéePublication = 0;
 		boolean valide = false;
@@ -282,120 +312,273 @@ public class GestionnaireDeDocuments {
 		return annéePublication;
 	}
 
-	private static void modifierNbCopies() {
-		System.out.println("\n==========MODIFIER LE NOMBRE DE COPIES D'UN DOCUMENT==========");   
-    Document doc = trouverDocumentParNoEnregistrement();
-    System.out.println("\nNombre de copies actuel : " + doc.getNbCopies());
+	private static void créerDictionnaire() {
+		System.out.println("\n==========CRÉATION D'UN DICTIONNAIRE==========");
+		System.out.println("\nVeuillez fournir le titre du dictionnaire.");
+		String titre = scanner.nextLine().trim();
 
-    System.out.println("\nVoulez-vous augmenter ou diminuer le nombre de copies?\n1. Augmenter\n2. Diminuer");
+		System.out.println("\nVeuillez fournir le nombre de copies du dictionnaire que vous avez.");
+		int nbCopies = validerNombre();
+
+		énumérerLangues();
+		int option = traiterOption(1, Langue.values().length);
+		Langue langue = Langue.values()[option - 1];
+
+		documents.add(new Dictionnaire(titre, nbCopies, langue));
+		System.out.println("\nLe dictionnaire a été créé et ajouté avec succès!");
+	}
+
+	private static void supprimerDocument() {
+		System.out.println("\n==========SUPPRIMER UN DOCUMENT==========\n");
+		afficherDocuments();
+		Document document = trouverDocumentParTitreEtNoEnregistrement();
+
+		System.out.println("\nVoulez-vous supprimer ce document ?\n1. Oui\n2. Non");
+		int option = traiterOption(1, 2);
+
+		if (option == 1) {
+			documents.remove(document);
+			System.out.println("\nLe document a été supprimé avec succès !");
+		} else {
+			System.out.println("\nLe document n'a pas été supprimé.");
+		}
+	}
+
+	private static void afficherDocuments() {
+		System.out.println("Liste des documents");
+		for (int i = 0; i < documents.size(); i++) {
+			System.out.println(documents.get(i).getNoEnregistrement() + " - " + documents.get(i).getTitre());
+		}
+	}
+
+	private static Document trouverDocumentParTitreEtNoEnregistrement() {
+		Document document = null;
+		boolean succès = false;
+
+		while (!succès) {
+			try {
+				System.out.println("\nVeuillez fournir le titre d'un document.");
+				String titre = scanner.nextLine().trim();
+
+				System.out.println("\nVeuillez fournir le numéro d'enregistrement d'un document.");
+				String noEnregistrement = scanner.nextLine().trim();
+
+				document = documents.stream().filter(doc -> doc.getTitre().equalsIgnoreCase(titre)
+						&& doc.getNoEnregistrement().equals(noEnregistrement)).findFirst().get();
+
+				if (document != null) {
+					succès = true;
+				} else {
+					System.out.println("\nAucun document ne correspond à ces informations. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nUne erreur s'est produite. Veuillez recommencer.");
+			}
+		}
+		return document;
+	}
+
+	private static void afficherCaractéristiques() {
+		System.out.println("\n==========AFFICHER LES CARACTÉRISTIQUES D'UN DOCUMENT==========");
+		Document document = trouverDocumentParNoEnregistrement();
+		System.out.println("\n" + document.toString());
+	}
+
+	private static Document trouverDocumentParNoEnregistrement() {
+		Document document = null;
+		boolean succès = false;
+
+		while (!succès) {
+			try {
+				System.out.println("\nVeuillez fournir le numéro d'enregistrement d'un document.");
+				String noEnregistrement = scanner.nextLine().trim();
+
+				document = documents.stream().filter(doc -> doc.getNoEnregistrement().equals(noEnregistrement))
+						.findFirst().get();
+
+				if (document != null) {
+					succès = true;
+				} else {
+					System.out.println("\nAucun document ne correspond à ce numéro d'enregistrement. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nUne erreur s'est produite. Veuillez recommencer.");
+			}
+		}
+		return document;
+	}
+
+	private static void afficherPrixLittéraires() {
+		System.out.println("\n==========AFFICHER LES PRIX LITTÉRAIRES D'UN ROMAN==========");
+		ArrayList<Roman> romans = trouverDocumentsRoman();
+
+		if (romans.size() > 0) {
+			afficherRomans(romans);
+			Roman roman = trouverRomanParTitreEtAuteur(romans);
+			roman.afficherListePrixLittéraires();
+		} else {
+			System.out.println("\nIl n'y a aucun roman dans la liste de documents.");
+		}
+	}
+
+	private static ArrayList<Roman> trouverDocumentsRoman() {
+		ArrayList<Roman> romans = new ArrayList<Roman>();
+
+		for (Document document : documents) {
+			if (document instanceof Roman) {
+				romans.add((Roman) document);
+			}
+		}
+		return romans;
+	}
+
+	private static void afficherRomans(ArrayList<Roman> romans) {
+		System.out.println("\nListe des romans");
+		for (int i = 0; i < romans.size(); i++) {
+			System.out.println(romans.get(i).getTitre() + " - " + romans.get(i).getAuteur());
+		}
+	}
+
+	private static Roman trouverRomanParTitreEtAuteur(ArrayList<Roman> romans) {
+		Roman roman = null;
+		boolean succès = false;
+
+		while (!succès) {
+			try {
+				System.out.println("\nVeuillez fournir le titre d'un roman.");
+				String titre = scanner.nextLine().trim();
+
+				System.out.println("\nVeuillez fournir l'auteur d'un roman.");
+				String auteur = scanner.nextLine().trim();
+
+				roman = romans.stream().filter(romanRecherché -> romanRecherché.getTitre().equalsIgnoreCase(titre)
+						&& romanRecherché.getAuteur().equalsIgnoreCase(auteur)).findFirst().get();
+
+				if (roman != null) {
+					succès = true;
+				} else {
+					System.out.println("\nAucun roman ne correspond à ces informations. Réessayez.");
+				}
+			} catch (Exception e) {
+				System.out.println("\nUne erreur s'est produite. Veuillez recommencer.");
+			}
+		}
+		return roman;
+	}
+
+	private static void modifierNbCopies() {
+		System.out.println("\n==========MODIFIER LE NOMBRE DE COPIES D'UN DOCUMENT==========");
+		Document doc = trouverDocumentParNoEnregistrement();
+		System.out.println("\nNombre de copies actuel : " + doc.getNbCopies());
+
+		System.out.println("\nVoulez-vous augmenter ou diminuer le nombre de copies?\n1. Augmenter\n2. Diminuer");
 		int option = traiterOption(1, 2);
 
 		switch (option) {
-			case 1: {
-				System.out.println("\nVeuillez fournir le nombre de copies à ajouter.");
-				int nbCopiesAugmenter = validerNombre();
-				document.setNbCopies(document.getNbCopies() + nbCopiesAugmenter);
-				break;
-			}
-			case 2: {
-				System.out.println("\nVeuillez fournir le nombre de copies à enlever.");
-				int nbCopiesDiminuer = validerNbCopiesDiminuer(document);
-				document.setNbCopies(document.getNbCopies() - nbCopiesDiminuer);
-				break;}
-			}
-			System.out.println("\nLe nombre de copies a été modifié avec succès!");
-}
+		case 1: {
+			System.out.println("\nVeuillez fournir le nombre de copies à ajouter.");
+			int nbCopiesAugmenter = validerNombre();
+			doc.setNbCopies(doc.getNbCopies() + nbCopiesAugmenter);
+			break;
+		}
+		case 2: {
+			System.out.println("\nVeuillez fournir le nombre de copies à enlever.");
+			int nbCopiesDiminuer = validerNbCopiesDiminuer(doc);
+			doc.setNbCopies(doc.getNbCopies() - nbCopiesDiminuer);
+			break;
+		}
+		}
+		System.out.println("\nLe nombre de copies a été modifié avec succès!");
+	}
 
-private static int validerNbCopiesDiminuer(Document doc) {
-    int nb = 0;
+	private static int validerNbCopiesDiminuer(Document doc) {
+		int nb = 0;
 		boolean valide = false;
 
-    while (!valide) {
-        try {
-            nb = Integer.parseInt(scanner.nextLine().trim());
-            if (nb > 0 && nb <= doc.getNbCopies()) {
-                valide = true;
-            } else {
-							System.out.println("\nVeuillez fournir un nombre entier positif et inférieur au nombre de copies du document. Réessayez.");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Veuillez entrer un entier valide.");
-        }
-    }
+		while (!valide) {
+			try {
+				nb = Integer.parseInt(scanner.nextLine().trim());
+				if (nb > 0 && nb <= doc.getNbCopies()) {
+					valide = true;
+				} else {
+					System.out.println(
+							"\nVeuillez fournir un nombre entier positif et inférieur au nombre de copies du document. Réessayez.");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Veuillez entrer un entier valide.");
+			}
+		}
 		return nb;
-}
+	}
 
-private static void modifierTitreDocument() {
-	System.out.println("\n==========MODIFIER LE TITRE D'UN DOCUMENT==========\n");
-	afficherDocuments();
-    Document doc = trouverDocumentParTitreEtNoEnregistrement();
+	private static void modifierTitreDocument() {
+		System.out.println("\n==========MODIFIER LE TITRE D'UN DOCUMENT==========\n");
+		afficherDocuments();
+		Document doc = trouverDocumentParTitreEtNoEnregistrement();
 
-    System.out.println("\nEntrez le nouveau titre");
-    String nouveauTitre = scanner.nextLine().trim();
+		System.out.println("\nEntrez le nouveau titre");
+		String nouveauTitre = scanner.nextLine().trim();
 
-    System.out.println("\nNouveau titre proposé : " + nouveauTitre);
-    System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
-    int option = traiterOption(1, 2);
+		System.out.println("\nNouveau titre proposé : " + nouveauTitre);
+		System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
+		int option = traiterOption(1, 2);
+
+		if (option == 1) {
+			doc.setTitre(nouveauTitre);
+			System.out.println("\nLe titre du document a été modifié avec succès!");
+		} else {
+			System.out.println("\nModification annulée.");
+		}
+	}
+
+	private static void modifierAuteurLivre() {
+		System.out.println("\n==========MODIFIER L'AUTEUR D'UN LIVRE==========");
+		ArrayList<Livre> livres = trouverDocumentsLivre();
+		if (livres.size() > 0) {
+			afficherLivres(livres);
+			Livre livre = trouverLivreParTitreEtAuteur(livres);
+
+			System.out.println("\nEntrez le nouvel auteur : ");
+			String nouvelAuteur = scanner.nextLine().trim();
+
+			System.out.println("\nNouvel auteur proposé : " + nouvelAuteur);
+			System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
+			int option = traiterOption(1, 2);
 
 			if (option == 1) {
-				document.setTitre(nouveauTitre);
-				System.out.println("\nLe titre du document a été modifié avec succès!");
+				livre.setAuteur(nouvelAuteur);
+				System.out.println("\nL'auteur du livre a été modifié avec succès!");
+			} else {
+				System.out.println("\nModification annulée.");
 			}
-    else {
-        System.out.println("\nModification annulée.");
-    }
-}
+		} else {
+			System.out.println("\nIl n'y a aucun livre dans la liste de documents.");
+		}
+	}
 
-private static void modifierAuteurLivre() {
-	System.out.println("\n==========MODIFIER L'AUTEUR D'UN LIVRE==========");
-	ArrayList<Livre> livres = trouverDocumentsLivre();
-	if (livres.size() > 0) {
-		afficherLivres(livres);
-		Livre livre = trouverLivreParTitreEtAuteur(livres);
+	private static ArrayList<Livre> trouverDocumentsLivre() {
+		ArrayList<Livre> livres = new ArrayList<Livre>();
 
-    System.out.println("\nEntrez le nouvel auteur : ");
-    String nouvelAuteur = scanner.nextLine().trim();
+		for (Document doc : documents) {
+			if (doc instanceof Livre) {
+				livres.add((Livre) doc);
+			}
+		}
+		return livres;
+	}
 
-    System.out.println("\nNouvel auteur proposé : " + nouvelAuteur);
-    System.out.println("Confirmez-vous la modification ?\n1. Oui\n2. Non");
-    int option = traiterOption(1, 2);
+	private static void afficherLivres(ArrayList<Livre> livres) {
+		System.out.println("\nListe des livres");
+		for (Livre livre : livres) {
+			System.out.println(livre.getTitre() + " - " + livre.getAuteur());
+		}
+	}
 
-				if (option == 1) {
-					livre.setAuteur(nouvelAuteur);
-					System.out.println("\nL'auteur du livre a été modifié avec succès!");
-				}
-    else {
-        System.out.println("Modification annulée.");
-    }
-}
-else {
-	System.out.println("\nIl n'y a aucun livre dans la liste de documents.");
-}
-}
+	private static Livre trouverLivreParTitreEtAuteur(ArrayList<Livre> livres) {
+		Livre livreRecherché = null;
+		boolean succès = false;
 
-private static ArrayList<Livre> trouverDocumentsLivre() {
-	ArrayList<Livre> livres = new ArrayList<Livre>();
-
-    for (Document doc : documents) {
-        if (doc instanceof Livre) {
-            livres.add(doc);
-        }
-    }
-    return livres;
-}
-
-private static void afficherLivres(ArrayList<Livre> livres) {
-	System.out.println("\nListe des livres");
-    for (Document livre : livres) {
-        System.out.println(livre.getTitre() + " - " + livre.getAuteur());
-    }
-}
-
-private static Livre trouverLivreParTitreEtAuteur(ArrayList<Livre> livres) {
-	Livre livre = null;
-			boolean succès = false;
-
-    while (!succès) {
+		while (!succès) {
 			try {
 				System.out.println("\nVeuillez fournir le titre d'un livre.");
 				String titre = scanner.nextLine().trim();
@@ -403,10 +586,11 @@ private static Livre trouverLivreParTitreEtAuteur(ArrayList<Livre> livres) {
 				System.out.println("\nVeuillez fournir l'auteur d'un livre.");
 				String auteur = scanner.nextLine().trim();
 
-				livre = livres.stream().filter(livre -> livre.getTitre().equalsIgnoreCase(titre)
-						&& livre.getAuteur().equalsIgnoreCase(auteur)).findFirst().get();
+				livreRecherché = livres.stream().filter(
+						livre -> livre.getTitre().equalsIgnoreCase(titre) && livre.getAuteur().equalsIgnoreCase(auteur))
+						.findFirst().get();
 
-				if (livre != null) {
+				if (livreRecherché != null) {
 					succès = true;
 				} else {
 					System.out.println("\nAucun livre ne correspond à ces informations. Réessayez.");
@@ -414,22 +598,30 @@ private static Livre trouverLivreParTitreEtAuteur(ArrayList<Livre> livres) {
 			} catch (Exception e) {
 				System.out.println("\nUne erreur s'est produite. Veuillez recommencer.");
 			}
-    }
-		return livre;
-}
-private static void ajoutDocumentsPrédéfinis() {
-	documents.add(new Roman("Les Misérables", 6, "Victor Hugo", 1734, ArrayList<String>("Prix Goncourt", "Prix Goncourt")));
-	documents.add(new Roman("Le Seigneur des Anneaux", 10, "J.R.R. Tolkien", 1536, ArrayList<String>()));
-	documents.add(new Roman("1984", 3, "George Orwell", 2051, ArrayList<String>("Prix Renaudot")));
-	documents.add(new Manuel("Les softskills pour les nuls", 2, "Nelly Magré", 277, Domaine.Médecine));
-	documents.add(new Manuel("Éducation alimentaire : 21 ateliers d'éveil au goût et aux 5 sens", 1, "Carole Ligniez", 176, Domaine.Nutrition));
-	documents.add(new Manuel("SOS mal de dos : les bons gestes et les bonnes postures", 4, "Frédéric Srour", 127, Domaine.Ergonomie));
-	documents.add(new Revue("Protégez-vous", 2, Mois.Janvier, 2024));
-	documents.add(new Revue("Protégez-vous", 1, Mois.Février, 2024));
-	documents.add(new Revue("Protégez-vous", 2, Mois.Mars, 2024));
-	documents.add(new Dictionnaire("Larousse de l'anglais", 1, Langue.ANGLAIS));
-	documents.add(new Dictionnaire("Dictionnaire de français", 3, Langue.FRANÇAIS));
-	documents.add(new Dictionnaire("Dictionnaire de l'allemand", 1, Langue.ALLEMAND));
-	System.out.println("\nDocuments prédéfinis ont été ajoutés avec succès!");
-}
+		}
+		return livreRecherché;
+	}
+
+	private static void ajoutDocumentsPrédéfinis() {
+		ArrayList<String> prixRoman1 = new ArrayList<String>();
+		ArrayList<String> prixRoman2 = new ArrayList<String>();
+		ArrayList<String> prixRoman3 = new ArrayList<String>();
+		prixRoman1.add("Prix Goncourt");
+		prixRoman3.add("Prix Renaudot");
+		documents.add(new Roman("Les Misérables", 6, "Victor Hugo", 1734, prixRoman1));
+		documents.add(new Roman("Le Seigneur des Anneaux", 10, "J.R.R. Tolkien", 1536, prixRoman2));
+		documents.add(new Roman("1984", 3, "George Orwell", 2051, prixRoman3));
+		documents.add(new Manuel("Les softskills pour les nuls", 2, "Nelly Magré", 277, Domaine.Médecine));
+		documents.add(new Manuel("Éducation alimentaire : 21 ateliers d'éveil au goût et aux 5 sens", 1,
+				"Carole Ligniez", 176, Domaine.Nutrition));
+		documents.add(new Manuel("SOS mal de dos : les bons gestes et les bonnes postures", 4, "Frédéric Srour", 127,
+				Domaine.Ergonomie));
+		documents.add(new Revue("Protégez-vous", 2, Mois.Janvier, 2024));
+		documents.add(new Revue("Protégez-vous", 1, Mois.Février, 2024));
+		documents.add(new Revue("Protégez-vous", 2, Mois.Mars, 2024));
+		documents.add(new Dictionnaire("Larousse de l'anglais", 1, Langue.Anglais));
+		documents.add(new Dictionnaire("Dictionnaire de français", 3, Langue.Français));
+		documents.add(new Dictionnaire("Dictionnaire de l'allemand", 1, Langue.Allemand));
+		System.out.println("\nDocuments prédéfinis ajoutés avec succès!");
+	}
 }

@@ -1,3 +1,15 @@
+/*NOMS DES MEMBRES ET CODES PERMANENTS :
+ * 
+ * Martel,Angela                           MARA22559304
+ * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
+ * Mbonwo Kenne,Lesline                    MBOL87300100
+ * Enga Enga,Mike Landry                   ENGM66310200 
+ * 
+ * 
+ * 
+ * DESCRIPTION : L’objectif est de modéliser un type de document caractérisé par une date de publication (mois et année), en plus des attributs de base, pour gérer les revues de la bibliothèque.
+*/
+
 package devoir5;
 
 public class Revue extends Document {

@@ -1,3 +1,15 @@
+/*NOMS DES MEMBRES ET CODES PERMANENTS :
+ * 
+ * Martel,Angela                           MARA22559304
+ * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
+ * Mbonwo Kenne,Lesline                    MBOL87300100
+ * Enga Enga,Mike Landry                   ENGM66310200 
+ * 
+ * 
+ * 
+ * DESCRIPTION : L’objectif est de représenter un type de livre qui peut avoir remporté plusieurs prix littéraires afin de valoriser ces œuvres et faciliter leur identification dans la collection.
+*/
+
 package devoir5;
 
 import java.util.ArrayList;
@@ -16,9 +28,9 @@ public class Roman extends Livre {
 
 	public void afficherListePrixLittéraires() {
 		if (listePrixLittéraires.isEmpty()) {
-			System.out.println("Ce roman n'a pas gagné de prix littéraires.");
+			System.out.println("\nCe roman n'a pas gagné de prix littéraires.");
 		} else {
-			System.out.println("Ce roman a gagné :");
+			System.out.println("\nCe roman a gagné :");
 			for (String prix : listePrixLittéraires) {
 				System.out.println(prix);
 			}
