@@ -1,3 +1,17 @@
+/*NOMS DES MEMBRES ET CODES PERMANENTS :
+ * 
+ * Martel,Angela                           MARA22559304
+ * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
+ * Mbonwo Kenne,Lesline                    MBOL87300100
+ * Enga Enga,Mike Landry                   ENGM66310200
+ * Kobangoye,Philippe Henri                KOBP68350400
+ * 
+ * 
+ * 
+ * 
+ * DESCRIPTION : L’objectif est de définir la classe de base commune à tous les documents, avec un numéro d’enregistrement unique, un titre et un nombre de copies modifiable, pour permettre une gestion uniforme des différents types de documents.
+ */
+
 //https://stackoverflow.com/a/20536671
 
 package devoir5;

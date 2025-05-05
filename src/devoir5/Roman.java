@@ -1,3 +1,17 @@
+/*NOMS DES MEMBRES ET CODES PERMANENTS :
+ * 
+ * Martel,Angela                           MARA22559304
+ * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
+ * Mbonwo Kenne,Lesline                    MBOL87300100
+ * Enga Enga,Mike Landry                   ENGM66310200
+ * Kobangoye,Philippe Henri                KOBP68350400
+ * 
+ * 
+ * 
+ * 
+ * DESCRIPTION : L’objectif est de représenter un type de livre qui peut avoir remporté plusieurs prix littéraires, afin de valoriser ces œuvres et faciliter leur identification dans la collection.
+ *  */
+
 package devoir5;
 
 import java.util.ArrayList;
