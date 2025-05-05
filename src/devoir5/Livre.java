@@ -4,13 +4,11 @@
  * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
  * Mbonwo Kenne,Lesline                    MBOL87300100
  * Enga Enga,Mike Landry                   ENGM66310200
- * Kobangoye,Philippe Henri                KOBP68350400
- * 
  * 
  * 
  * 
  * DESCRIPTION : L’objectif est de définir une classe intermédiaire pour les documents de type livre, en ajoutant les attributs auteur et nombre de pages, afin de regrouper les caractéristiques communes aux romans et aux manuels.
- *  */
+*/
 
 package devoir5;
 
@@ -23,15 +21,15 @@ public abstract class Livre extends Document {
 		this.auteur = auteur;
 		this.nbPages = nbPages;
 	}
-	
+
 	public String getAuteur() {
 		return auteur;
 	}
-	
+
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	
+
 	public int getNbPages() {
 		return nbPages;
 	}

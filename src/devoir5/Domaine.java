@@ -3,9 +3,7 @@
  * Martel,Angela                           MARA22559304
  * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
  * Mbonwo Kenne,Lesline                    MBOL87300100
- * Enga Enga,Mike Landry                   ENGM66310200
- * Kobangoye,Philippe Henri                KOBP68350400
- * 
+ * Enga Enga,Mike Landry                   ENGM66310200 * 
  * 
  * 
  * 
@@ -13,9 +11,8 @@
  * 
  * */
 
-
 package devoir5;
 
 public enum Domaine {
-	Biologie,Nutrition,Ergonomie,Médecine,Chiropratique;
+	Biologie, Nutrition, Ergonomie, Médecine, Chiropratique;
 }

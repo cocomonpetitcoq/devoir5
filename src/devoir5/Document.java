@@ -4,15 +4,15 @@
  * Kamgaing Koudjou,Arnold Ulrich          KAMA72320600
  * Mbonwo Kenne,Lesline                    MBOL87300100
  * Enga Enga,Mike Landry                   ENGM66310200
- * Kobangoye,Philippe Henri                KOBP68350400
  * 
  * 
  * 
  * 
  * DESCRIPTION : L’objectif est de définir la classe de base commune à tous les documents, avec un numéro d’enregistrement unique, un titre et un nombre de copies modifiable, pour permettre une gestion uniforme des différents types de documents.
+ * 
+ * RÉFÉRENCES : 
+ * Masudul. (2013, 12 décembre). Creating a random string with A-Z and 0-9 in Java [duplicate]. Stackoverflow. https://stackoverflow.com/questions/20536566/creating-a-random-string-with-a-z-and-0-9-in-java/20536671#20536671
  */
-
-//https://stackoverflow.com/a/20536671
 
 package devoir5;
 
